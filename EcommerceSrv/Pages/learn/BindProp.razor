@@ -1,0 +1,33 @@
+﻿@page "/learn/bindprop"
+
+<h3>BindProp</h3>
+
+
+Name: @product.Name
+<br />
+
+Active: @product.IsAvailable
+<br />
+Price : @product.Price
+<br />
+This product is: @(product.IsAvailable ? "Available" : "Not Available")
+<br />
+<br />
+@*Price : <input type="number" @bind-value="@product.Price" @bind-value:event="oninput" />*@
+
+Available:
+<input type="checkbox" @bind-value="product.IsAvailable" checked="@(product.IsAvailable?"checked":null)" />
+<br />
+Price : <input type="number" @bind="@product.Price" @bind:event="oninput" />
+
+
+
+@code {
+    EcommerceModels.Learn.DemoProduct product = new()
+        {
+            ID = 1,
+            Name = "Tea",
+            IsAvailable = true,
+            Price = 9.99
+        };
+}
