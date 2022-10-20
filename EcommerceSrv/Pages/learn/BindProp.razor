@@ -12,22 +12,43 @@ Price : @product.Price
 <br />
 This product is: @(product.IsAvailable ? "Available" : "Not Available")
 <br />
+Poperty selected: @selectedProp
 <br />
+@if(!String.IsNullOrWhiteSpace(selectedProp)){
+    <p>Property Value: @product.ProductProperties.FirstOrDefault(u=>u.Key==selectedProp).Value</p>
+}
 @*Price : <input type="number" @bind-value="@product.Price" @bind-value:event="oninput" />*@
 
 Available:
 <input type="checkbox" @bind-value="product.IsAvailable" checked="@(product.IsAvailable?"checked":null)" />
 <br />
-Price : <input type="number" @bind="@product.Price" @bind:event="oninput" />
+Price :
+<input type="number" @bind="@product.Price" @bind:event="oninput" />
+<br />
+Product Properties:
+<select @bind="selectedProp">
+    @foreach(var prop in product.ProductProperties)
+    {
+        <option value="@prop.Key">@prop.Key</option>
+    }
+
+</select>
 
 
 
 @code {
-    EcommerceModels.Learn.DemoProduct product = new()
+    private string selectedProp = "";
+
+    DemoProduct product = new()
         {
             ID = 1,
             Name = "Tea",
             IsAvailable = true,
-            Price = 9.99
+            Price = 9.99,
+            ProductProperties = new List<EcommerceModels.Learn.DemoProductProp>
+            {
+                  new DemoProductProp{ID = 1, Key = "Color", Value = "Black"},
+                  new DemoProductProp{ID = 2, Key = "Flavor", Value = "Rose Jasmine"}
+            }
         };
 }

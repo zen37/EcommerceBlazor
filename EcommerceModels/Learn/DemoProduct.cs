@@ -15,5 +15,7 @@ namespace EcommerceModels.Learn
         public double Price { get; set; }
  
         public Boolean IsAvailable { get; set; }
+
+        public IEnumerable<DemoProductProp>ProductProperties { get; set; }
     }
 }
