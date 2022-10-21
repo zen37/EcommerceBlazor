@@ -49,6 +49,30 @@
             }
         </div>
     </div>
+    <br/>
+    <br />
+    <div calls="col-12 pt-4">
+        <h2 class="text-success">Products</h2><hr />
+        <table class="table table-stripped">
+            <tbody>
+                @foreach (var p in Products)
+                {
+                    <tr>
+                        <td>
+                            <input type="text" @bind="p.Name" @bind:event="oninput" />
+                        </td>
+                        <td>
+                            <input type="text" @bind="p.Price" @bind:event="oninput" />
+                        </td>
+                        <td>
+                            <input type="checkbox" @bind-value="p.IsAvailable" checked="@(p.IsAvailable?"checked":null)" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
 </div>
 
 
@@ -62,9 +86,46 @@
             IsAvailable = true,
             Price = 9.99,
             ProductProperties = new List<EcommerceModels.Learn.DemoProductProp>
-    {
-    new DemoProductProp{ID = 1, Key = "Color", Value = "Black"},
-    new DemoProductProp{ID = 2, Key = "Flavor", Value = "Rose Jasmine"}
-    }
+            {
+                new DemoProductProp{ID = 1, Key = "Color", Value = "Black"},
+                new DemoProductProp{ID = 2, Key = "Flavor", Value = "Rose Jasmine"}
+            }
         };
+
+    List<DemoProduct> Products = new();
+
+
+    protected override void OnInitialized()
+    {
+
+        Products.Add(new()
+            {
+                ID = 1,
+                Name = "MIDnight Blaze",
+                IsAvailable = false,
+
+                Price = 10.99,
+                ProductProperties = new()
+                {
+                new DemoProductProp { ID = 1, Key = "Flavor", Value = "Rose"},
+                     new DemoProductProp { ID = 2, Key = "Size", Value = "20oz"},
+                    new DemoProductProp { ID = 3, Key = "Color", Value="Purple" }
+                }
+            });
+
+        Products.Add(new()
+            {
+                ID = 2,
+                Name = "Blossom Lily",
+                IsAvailable = true,
+                Price = 13.99,
+                ProductProperties = new()
+            {
+                new DemoProductProp { ID = 1, Key = "Flavor", Value = "Lily" },
+                new DemoProductProp { ID = 2, Key = "Size", Value = "18oz" },
+                new DemoProductProp {ID = 3,Key = "Color",Value = "White"}
+            }
+            });
+    }
+  
 }

@@ -16,6 +16,6 @@ namespace EcommerceModels.Learn
  
         public Boolean IsAvailable { get; set; }
 
-        public IEnumerable<DemoProductProp>ProductProperties { get; set; }
+        public List<DemoProductProp>ProductProperties { get; set; }
     }
 }
