@@ -1,8 +1,18 @@
 using EcommerceSrv.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using EcommerceSrv.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("EcommerceSrvIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'EcommerceSrvIdentityDbContextConnection' not found.");
+
+builder.Services.AddDbContext<EcommerceSrvIdentityDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<EcommerceSrvIdentityDbContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -27,5 +37,6 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+app.UseAuthentication();;
 
 app.Run();

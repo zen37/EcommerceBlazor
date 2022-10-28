@@ -10,7 +10,6 @@
   "profiles": {
     "EcommerceSrv": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7053;http://localhost:5053",
       "environmentVariables": {
